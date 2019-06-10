@@ -26,12 +26,6 @@ return function (App $app) {
         return $this->response->withJson($input);
     });
 
-    $app->get('/api/test', function($request, $response) use ($app) {
-        $headers = $request->getHeaders();
-        $this->auth0->checkJWT($headers);
-        echo json_encode($this->auth0->getCurrentToken());
-    });
-
     $app->get('/api/items', function($request, $response) {
         $this->auth0->checkJWT($request->getHeaders());
         $email = $this->auth0->getEmail();
